@@ -8,7 +8,7 @@ The context of this work is an academic project where we were demanded to denois
 
 Block-matching and 3D filtering (BM3D) is considered a state-of-the-art approach among the non-local means filtering methodology that was first introduced in 2007 by Dabov et al [1].<br>
 The algorithm is composed of two stages; in the first stage we divide the picture into patches, then each patch would be taken as a reference to build a 3 dimensional (or 4 dimensional in case of colored images) block grouping the reference with the most similar and not necessarily disjoint patches, afterwards the obtained block would go through the steps of 3D (or 4D) Fourrier Transform, hardthreshold filtering, inverse 3D (or 4D) Fourier Transform, block-wise estimation and in the end aggregation to replace the original patch. The initial output passes through a second stage with the only difference being the application of a Wiener filtering instead of the hardthresholding.<br>
-![](https://raw.githubusercontent.com/AlaaBenZekri/Image_Denoising/main/bm3d.png)<br>
+![](https://raw.githubusercontent.com/AlaaBenZekri/Image_Denoising/main/images_for_readme/bm3d.png)<br>
 The implementation that we used for comparison with our work is based on the Makinen et al. 2019 paper [2] where significant ¨ improvements in terms of computation (and no noticeable reduction in performance) were introduced.<br>
 
 ## Denoising using Auto-Encoders
@@ -24,20 +24,20 @@ The corruption can be modelled in various forms ; an additive Gaussian noise, a 
 For the sake of simplicity, let's consider the corruption as a white additive noise z[3]. Thus, the optimization problem in this case will be :<br>
 ![](https://raw.githubusercontent.com/AlaaBenZekri/Image_Denoising/main/equations/eq2.JPG)<br>
 The model that we’ve developed in our project is based on an Auto-Encoder architecture with an encoder and a decoder that are composed of convolutional layers instead of fully connected ones :<br>
-![](https://raw.githubusercontent.com/AlaaBenZekri/Image_Denoising/main/autoencodercnn.JPG)<br>
+![](https://raw.githubusercontent.com/AlaaBenZekri/Image_Denoising/main/images_for_readme/autoencodercnn.JPG)<br>
 
 ## Results and Interpretations
 
 irst of all, let us introduce a metric that we will use to understand how accurately our models are reconstructing the corrupted images ; Peak Signal-to-Noise Ratio (PSNR).It's expression is defined as follows :<br>
 ![](https://raw.githubusercontent.com/AlaaBenZekri/Image_Denoising/main/equations/eq3.JPG)<br>
 Where MAX_I denotes the maximum possible value of the image (1 in our case), and MSE represents the Mean Squared Error between two images.<br>
-![](https://raw.githubusercontent.com/AlaaBenZekri/Image_Denoising/main/result.png)<br>
+![](https://raw.githubusercontent.com/AlaaBenZekri/Image_Denoising/main/images_for_readme/result.png)<br>
 We can see that all of the used methods were successful in reconstructing the original image with a significant improvement of at least 11dB in terms of PSNR in comparison with the noisy image.<br>
 
 Nevertheless, we can notice that the deep learning algorithms resulted in better reconstructions than the one produced using BM3D, not only in terms of improvement of PSNR (around 3dB) but also perceptually as the BM3D image was over-smoothed.<br>
 
 Moreover, it seems that both Auto-Encoders resulted in almost identical results. However, we believe that we should delay our judgement until looking at further results.<br>
-![](https://raw.githubusercontent.com/AlaaBenZekri/Image_Denoising/main/plot.png)<br>
+![](https://raw.githubusercontent.com/AlaaBenZekri/Image_Denoising/main/images_for_readme/plot.png)<br>
 From what we observe through the plot, the MSE Auto-Encoder performs better for lower levels of noise. Meanwhile, the MAE Auto-Encoder takes the lead, ever so slightly, when faced with higher levels of corruption.<br>
 
 In addition, with no surprises, the models' performances decreased drastically with the increase of the noise (but even when the image was completely corrupted, the models managed to provide reconstructions with a PSNR similar to that of a sigma^2=0.2 corrupted image).<br>
