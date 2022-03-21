@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The context of this notebook is an academic project where we were demanded to denoise images (without specifying the method). In the beginning I tried a non-ML solution that is called BM3D (Block Matching and 3D filtering), then I went ahead to experiment with the Deep Learning approach using the Auto-Encoder architecture.
+The context of this work is an academic project where we were demanded to denoise images (without specifying the method). In the beginning I tried a non-ML solution that is called BM3D (Block Matching and 3D filtering), then I went ahead to experiment with the Deep Learning approach using the Auto-Encoder architecture.
 
 ## Denoising using BM3D
 
